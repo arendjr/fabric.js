@@ -140,7 +140,9 @@ var filesToInclude = [
 
   ifSpecifiedInclude('text', 'src/text.class.js'),
 
-  ifSpecifiedInclude('node', 'src/node.js')
+  ifSpecifiedInclude('node', 'src/node.js'),
+
+  'FOOTER.js'
 ];
 
 appendFileContents(filesToInclude, function() {

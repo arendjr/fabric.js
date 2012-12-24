@@ -149,10 +149,6 @@
     _initDimensions: function() {
       var canvasEl = fabric.document.createElement('canvas');
 
-      if (!canvasEl.getContext && typeof G_vmlCanvasManager !== 'undefined') {
-        G_vmlCanvasManager.initElement(canvasEl);
-      }
-
       this._render(canvasEl.getContext('2d'));
     },
 
@@ -596,7 +592,7 @@
         this.fontStyle,
         this.fontWeight,
         this.fontSize + 'px',
-        (fabric.isLikelyNode ? ('"' + this.fontFamily + '"') : this.fontFamily)
+        this.fontFamily
       ].join(' ');
     },
 
@@ -611,16 +607,7 @@
       // Cufon doesn't play nice with textDecoration=underline if element doesn't have a parent
       container.appendChild(el);
 
-      if (typeof G_vmlCanvasManager === 'undefined') {
-        el.innerHTML = this.text;
-      }
-      else {
-        // IE 7 & 8 drop newlines and white space on text nodes
-        // see: http://web.student.tuwien.ac.at/~e0226430/innerHtmlQuirk.html
-        // see: http://www.w3schools.com/dom/dom_mozilla_vs_ie.asp
-        el.innerText =  this.text.replace(/\r?\n/gi, '\r');
-      }
-
+      el.innerHTML = this.text;
       el.style.fontSize = this.fontSize + 'px';
       el.style.letterSpacing = 'normal';
 

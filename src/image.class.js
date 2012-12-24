@@ -184,15 +184,10 @@
         return;
       }
 
-      var isLikelyNode = typeof Buffer !== 'undefined' && typeof window === 'undefined',
-          imgEl = this._originalImage,
+      var imgEl = this._originalImage,
           canvasEl = fabric.document.createElement('canvas'),
-          replacement = isLikelyNode ? new (require('canvas').Image)() : fabric.document.createElement('img'),
+          replacement = fabric.document.createElement('img'),
           _this = this;
-
-        if (!canvasEl.getContext && typeof G_vmlCanvasManager !== 'undefined') {
-          G_vmlCanvasManager.initElement(canvasEl);
-        }
 
       canvasEl.width = imgEl.width;
       canvasEl.height = imgEl.height;
@@ -211,18 +206,7 @@
       };
       replacement.width = imgEl.width;
       replacement.height = imgEl.height;
-
-      if (isLikelyNode) {
-        var base64str = canvasEl.toDataURL('image/png').replace(/data:image\/png;base64,/, '');
-        replacement.src = new Buffer(base64str, 'base64');
-        _this._element = replacement;
-
-        // onload doesn't fire in node, so we invoke callback manually
-        callback && callback();
-      }
-      else {
-        replacement.src = canvasEl.toDataURL('image/png');
-      }
+      replacement.src = canvasEl.toDataURL('image/png');
 
       return this;
     },

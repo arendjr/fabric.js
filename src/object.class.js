@@ -14,15 +14,6 @@
   }
 
   var Image = global.Image;
-  try {
-    var NodeImage = (typeof require !== 'undefined') && require('canvas').Image;
-    if (NodeImage) {
-      Image = NodeImage;
-    }
-  }
-  catch(err) {
-    fabric.log(err);
-  }
 
   /**
    * Root object class from which all 2d shape classes inherit from
@@ -1053,10 +1044,7 @@
      */
     toDataURL: function(callback) {
       var el = fabric.document.createElement('canvas');
-      if (!el.getContext && typeof G_vmlCanvasManager !== 'undefined') {
-        G_vmlCanvasManager.initElement(el);
-      }
-
+ 
       el.width = this.getBoundingRectWidth();
       el.height = this.getBoundingRectHeight();
 

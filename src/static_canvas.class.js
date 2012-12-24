@@ -232,12 +232,6 @@
      * @param {HTMLElement} element
      */
     _initCanvasElement: function(element) {
-      if (typeof element.getContext === 'undefined' &&
-          typeof G_vmlCanvasManager !== 'undefined' &&
-          G_vmlCanvasManager.initElement) {
-
-        G_vmlCanvasManager.initElement(element);
-      }
       if (typeof element.getContext === 'undefined') {
         throw CANVAS_INIT_ERROR;
       }
@@ -1189,9 +1183,6 @@
     supports: function (methodName) {
       var el = fabric.document.createElement('canvas');
 
-      if (typeof G_vmlCanvasManager !== 'undefined') {
-        G_vmlCanvasManager.initElement(el);
-      }
       if (!el || !el.getContext) {
         return null;
       }
